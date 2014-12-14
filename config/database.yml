@@ -1,0 +1,13 @@
+development:
+    adapter: mysql2
+    encoding: utf8
+    database: nfpmap
+    username: nfpmap
+    password: nfpmap
+
+production:
+    adapter: mysql2
+    encoding: utf8
+    database: nfpmap
+    username: nfpmap
+    password: nfpmap
