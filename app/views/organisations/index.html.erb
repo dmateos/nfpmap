@@ -7,7 +7,6 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:address) %></th>
       <th><%= model_class.human_attribute_name(:website) %></th>
       <th><%= model_class.human_attribute_name(:dataset) %></th>
       <th><%= model_class.human_attribute_name(:lat) %></th>
@@ -22,7 +21,6 @@
       <tr>
         <td><%= link_to organisation.id, organisation_path(organisation) %></td>
         <td><%= organisation.name %></td>
-        <td><%= organisation.address %></td>
         <td><%= organisation.website %></td>
         <td><%= organisation.dataset %></td>
         <td><%= organisation.lat %></td>
