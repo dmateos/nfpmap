@@ -1,6 +1,6 @@
 require 'csv'
 
-csv_data = File.read('app/script/suburbs.csv')
+csv_data = File.read('app/script/au-suburbs.csv')
 csv = CSV.parse(csv_data, headers: false)
 
 csv.each do |c|
@@ -12,4 +12,4 @@ csv.each do |c|
   suburb.long = c[10]
 
   suburb.save
-end
+endR
