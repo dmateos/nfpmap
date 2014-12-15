@@ -1,0 +1,59 @@
+<%= form_for @suburb, :html => { :class => "form-horizontal suburb" } do |f| %>
+
+    <% if @suburb.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@suburb.errors.count, "error") %> prohibited this suburb from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @suburb.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@suburb[:name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :postcode, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :postcode, :class => 'form-control' %>
+    </div>
+    <%= error_span(@suburb[:postcode]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :state, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :state, :class => 'form-control' %>
+    </div>
+    <%= error_span(@suburb[:state]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :lat, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lat, :class => 'form-control' %>
+    </div>
+    <%= error_span(@suburb[:lat]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :long, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :long, :class => 'form-control' %>
+    </div>
+    <%= error_span(@suburb[:long]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            suburbs_path, :class => 'btn btn-default' %>
+
+<% end %>
