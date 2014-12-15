@@ -11,16 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141214055737) do
+ActiveRecord::Schema.define(version: 20141215015833) do
 
   create_table "organisations", force: true do |t|
     t.string   "name"
     t.string   "address"
-    t.string   "state"
-    t.string   "suburb"
-    t.string   "postcode"
     t.string   "website"
     t.string   "dataset"
+    t.float    "lat",        limit: 24
+    t.float    "long",       limit: 24
+    t.integer  "suburb_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "suburbs", force: true do |t|
+    t.string   "name"
+    t.integer  "postcode"
+    t.string   "state"
     t.float    "lat",        limit: 24
     t.float    "long",       limit: 24
     t.datetime "created_at"

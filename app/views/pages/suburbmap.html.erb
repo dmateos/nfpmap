@@ -15,7 +15,7 @@
       <tbody>
         <% @org_suburb_count.each do |suburb, count| %>
           <tr>
-            <td> <%= suburb %> <td>
+            <td> <a class="haha" href="#"><%= suburb %></a><td>
             <td> <%= count %> </td>
           </tr>
         <% end %>
@@ -27,10 +27,16 @@
 <script>
   handler = Gmaps.build('Google');
   handler.buildMap({ provider : {}, internal: {id: 'map'}}, function() {
-    markers = handler.addMarkers(<%=raw @org_hash.to_json %>);
+    markers = handler.addMarkers(<%=raw @suburb_hash.to_json %>);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
     handler.getMap().setZoom(4);
+  });
+
+  $(document).ready(function() {
+    $('.haha').click(function() {
+      return false;
+    });
   });
 
 </script>

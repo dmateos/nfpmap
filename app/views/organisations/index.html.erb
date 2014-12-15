@@ -8,12 +8,11 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:address) %></th>
-      <th><%= model_class.human_attribute_name(:state) %></th>
-      <th><%= model_class.human_attribute_name(:suburb) %></th>
-      <th><%= model_class.human_attribute_name(:postcode) %></th>
       <th><%= model_class.human_attribute_name(:website) %></th>
+      <th><%= model_class.human_attribute_name(:dataset) %></th>
       <th><%= model_class.human_attribute_name(:lat) %></th>
       <th><%= model_class.human_attribute_name(:long) %></th>
+      <th><%= model_class.human_attribute_name(:suburb_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -24,12 +23,11 @@
         <td><%= link_to organisation.id, organisation_path(organisation) %></td>
         <td><%= organisation.name %></td>
         <td><%= organisation.address %></td>
-        <td><%= organisation.state %></td>
-        <td><%= organisation.suburb %></td>
-        <td><%= organisation.postcode %></td>
         <td><%= organisation.website %></td>
+        <td><%= organisation.dataset %></td>
         <td><%= organisation.lat %></td>
         <td><%= organisation.long %></td>
+        <td><%= organisation.suburb.name unless organisation.suburb.nil?%></td>
         <td><%=l organisation.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -50,4 +48,3 @@
             :class => 'btn btn-primary' %>
 
 <%= paginate @organisations %>
-

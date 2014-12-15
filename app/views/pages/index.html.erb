@@ -15,7 +15,7 @@
       <tbody>
         <% @org_suburb_count.each do |suburb, count| %>
           <tr>
-            <td> <%= suburb %> <td>
+            <td> <a class="haha" href="#"><%= suburb %></a><td>
             <td> <%= count %> </td>
           </tr>
         <% end %>
@@ -31,6 +31,12 @@
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
     handler.getMap().setZoom(4);
+  });
+
+  $(document).ready(function() {
+    $('.haha').click(function() {
+      return false;
+    });
   });
 
 </script>
