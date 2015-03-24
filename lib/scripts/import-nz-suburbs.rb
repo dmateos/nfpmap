@@ -1,6 +1,6 @@
 require 'csv'
 
-csv_data = File.read('app/script/nz-suburbs.csv')
+csv_data = File.read('lib/scripts/nz-suburbs.csv')
 csv = CSV.parse(csv_data, headers: false)
 
 csv.each do |c|

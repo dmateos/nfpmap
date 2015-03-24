@@ -2,7 +2,7 @@ require 'geocoder'
 
 Geocoder.configure(timeout: 1000)
 
-organisations = Organisation.all
+organisations = Organisation.where(dataset: "sacom")
 count = 0
 
 organisations.each do |org|

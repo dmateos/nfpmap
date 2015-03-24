@@ -22,11 +22,16 @@ class PagesController < ApplicationController
     }.map { |suburb|
       { lat: suburb.lat, lng: suburb.long, infowindow: suburb.name }
     }
+
     @org_suburb_count = Organisation.all
               .joins(:suburb)
               .group('suburbs.name')
               .order('count_suburb_id desc')
               .limit(16)
               .count('suburb_id')
+  end
+
+  def orgssuburbmap
+
   end
 end

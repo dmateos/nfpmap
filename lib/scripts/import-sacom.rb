@@ -1,6 +1,6 @@
 require 'csv'
 
-csv_data = File.read('app/script/sacom.csv')
+csv_data = File.read('lib/scripts/sacom.csv')
 csv = CSV.parse(csv_data, headers: true)
 
 csv.each do |c|
@@ -15,7 +15,7 @@ csv.each do |c|
 
   if not c['Suburb'].nil?
     suburb = Suburb.where(name: c['Suburb']).take
-    org.suburb = suburb;
+    org.suburb = suburb
   end
 
   org.save
