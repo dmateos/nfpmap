@@ -1,10 +1,11 @@
 class OrganisationsController < ApplicationController
+  before_action :set_organisation, only: [ :show, :edit, :update, :destroy ]
+
   def index
     @organisations = Organisation.page(params[:page])
   end
 
   def show
-    @organisation = Organisation.find(params[:id])
   end
 
   def new
@@ -17,21 +18,21 @@ class OrganisationsController < ApplicationController
   end
 
   def edit
-    @organisation = Organisation.find(params[:id])
   end
 
   def update
-    @organisation = Organisation.find(params[:id])
     @organisation.update(organisation_params);
     redirect_to organisations_path
   end
 
   def destroy
+  end
+  
+  private
+  def set_organisation
     @organisation = Organisation.find(params[:id])
   end
 
-  private
-  
   def organisation_params
     params.require(:organisation).permit(:name, :address, :state, :suburb, :postcode, :website, :lat, :long)
   end

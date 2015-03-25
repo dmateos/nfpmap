@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'pages#index'
   get "suburbmap", to: 'pages#suburbmap'
-  get "orgssuburbmap", to: 'pages#orgssuburbmap'
+  get "latlong", to: "suburbs#latlong"
 
   resources :organisations
   resources :suburbs

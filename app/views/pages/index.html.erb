@@ -4,9 +4,9 @@
     </div>
   </div>
   <div class="col-md-3">
-    <%= form_tag "/", method: :get do %>
-      <%= select_tag "datasets", options_for_select(Organisation.select(:dataset).map(&:dataset).uniq), multiple: true %>
-      <%= submit_tag "Submit" %>
+    <%= form_tag "/", method: :get, class: "form-horizontal"  do %>
+      <%= select_tag "datasets", options_for_select(Organisation.select(:dataset).map(&:dataset).uniq), multiple: true, class: "form-control"  %>
+      <%= submit_tag "Submit", class: "btn btn-primary" %>
     <% end %>
 
     <h3> Top Suburbs </h3>
@@ -20,7 +20,7 @@
       <tbody>
         <% @org_suburb_count.each do |suburb, count| %>
           <tr>
-            <td> <a class="haha" href="#"><%= suburb %></a><td>
+            <td> <a id="suburb_<%= suburb.gsub(" ", "_") %>" href="#"><%= suburb %></a><td>
             <td> <%= count %> </td>
           </tr>
         <% end %>
@@ -30,7 +30,7 @@
 </div>
 
 <script>
-  handler = Gmaps.build('Google');
+  handler = Gmaps.build('Google', { markers: { clusterer: { maxZoom: 16 } } } );
   handler.buildMap({ provider : {}, internal: {id: 'map'}}, function() {
     markers = handler.addMarkers(<%=raw @org_hash.to_json %>);
     handler.bounds.extendWith(markers);
@@ -38,9 +38,25 @@
     handler.getMap().setZoom(4);
   });
 
+  getLatLng = function(id) {
+    $.ajax({
+      type: "GET", 
+      url: "/latlong?suburb={0}".replace("{0}", id),
+      dataType: "json",
+      success: function(data) {
+        handler.getMap().setCenter(new google.maps.LatLng(data.lat, data.long));
+        handler.getMap().setZoom(10);
+      },
+      error : function(XMLHttpRequest, textStatus, errorThrown) {
+        alert(textStatus);
+        alert(XMLHttpRequest.responseText);
+      }
+    });
+  }
+
   $(document).ready(function() {
-    $('.haha').click(function() {
-      return false;
+    $("[id^=suburb_]").click(function() {
+      getLatLng(this.id);
     });
   });
 

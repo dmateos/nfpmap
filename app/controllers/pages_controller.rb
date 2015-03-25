@@ -5,6 +5,7 @@ class PagesController < ApplicationController
       { lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.address} <br/> #{org.suburb.name if org.suburb }" }
     }
 
+    @adelaide = Suburb.find_by_name("Adelaide")
     @org_suburb_count = @organisations
               .joins(:suburb)
               .group('suburbs.name')
@@ -25,11 +26,5 @@ class PagesController < ApplicationController
               .order('count_suburb_id desc')
               .limit(16)
               .count('suburb_id')
-  end
-
-  def orgssuburbmap
-    @suburbs = Suburb.all
-    @organisations = Organisation.all
-
   end
 end
