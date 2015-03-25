@@ -1,10 +1,8 @@
 class PagesController < ApplicationController
   def index
-    @organisations = Organisation.all
-    @org_hash = @organisations.select { |org|
-      org.lat != nil and org.long != nil
-    }.map{ |org |
-      { lat: org.lat, lng: org.long, infowindow: org.name }
+    @organisations = Organisation.where(dataset: params[:datasets]).includes(:suburb)
+    @org_hash = @organisations.select { |org| org.lat != nil and org.long != nil }.map{ |org |
+      { lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.address} <br/> #{org.suburb.name if org.suburb }" }
     }
 
     @org_suburb_count = @organisations
@@ -17,9 +15,7 @@ class PagesController < ApplicationController
 
   def suburbmap
     @suburbs = Suburb.all
-    @suburb_hash = @suburbs.select { |suburb|
-      suburb.lat != nil and suburb.long != nil
-    }.map { |suburb|
+    @suburb_hash = @suburbs.select { |suburb| suburb.lat != nil and suburb.long != nil }.map { |suburb|
       { lat: suburb.lat, lng: suburb.long, infowindow: suburb.name }
     }
 
@@ -32,6 +28,8 @@ class PagesController < ApplicationController
   end
 
   def orgssuburbmap
+    @suburbs = Suburb.all
+    @organisations = Organisation.all
 
   end
 end

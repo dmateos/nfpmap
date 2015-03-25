@@ -1,9 +1,14 @@
 <div class="row">
   <div class="col-md-9">
-    <div id="map" style='width: 100%; height: 600px;'>
+    <div id="map" style="width: 100%; height: 700px;">
     </div>
   </div>
   <div class="col-md-3">
+    <%= form_tag "/", method: :get do %>
+      <%= select_tag "datasets", options_for_select(Organisation.select(:dataset).map(&:dataset).uniq), multiple: true %>
+      <%= submit_tag "Submit" %>
+    <% end %>
+
     <h3> Top Suburbs </h3>
     <table class="table table-hover table-condensed">
       <thead>

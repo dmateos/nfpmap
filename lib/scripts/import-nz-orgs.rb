@@ -7,7 +7,7 @@ csv.each do |c|
   org = Organisation.new
 
   org.name = c['Organization Name']
-  org.address = "#{c["Main-Street Address"]}, #{c["Main-Postal Code"]}"
+  org.address = "#{c["Main-Street Address"]}, #{c["Main-Supplemental Address 1"]}, #{c["Main-Supplemental Address 2"]}, #{c["Main-Postal Code"]}, New Zealand"
   org.website = ""
   org.dataset = "cu-nz-orgs"
 
@@ -17,5 +17,4 @@ csv.each do |c|
   end
 
   org.save
-
 end
