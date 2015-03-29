@@ -5,15 +5,15 @@ class PagesController < ApplicationController
     case params[:group_by]
       when "lat/long"
         @org_hash = @organisations.select { |org| org.lat and org.long }.map { |org |
-          { lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.address} <br/> #{org.suburb.name if org.suburb }" }
+          #{ lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.address} <br/> #{org.suburb.name if org.suburb }" }
+          { lat: org.lat, lng: org.long, infowindow: "#{org.suburb.name if org.suburb }" }
         }
       when "suburbs"
         @org_hash = @organisations.select { |org| org.suburb }.map { |org |
-          { lat: org.suburb.lat, lng: org.suburb.long, infowindow: "#{org.name} <br/> #{org.address} <br/> #{org.suburb.name if org.suburb }" }
+          { lat: org.suburb.lat, lng: org.suburb.long, infowindow: "#{org.suburb.name}" }
         }
     end
 
-    @adelaide = Suburb.find_by_name("Adelaide")
     @org_suburb_count = @organisations
               .joins(:suburb)
               .group('suburbs.name')
