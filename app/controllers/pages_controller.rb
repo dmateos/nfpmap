@@ -6,24 +6,17 @@ class PagesController < ApplicationController
       @organisations = Organisation.all.includes(:suburb)
     end
 
-    if params.has_key?(:group_by)
-      case params[:group_by]
-        when "lat/long"
-          @org_hash = @organisations.select { |org| org.lat and org.long }.map { |org |
-            #{ lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.address} <br/> #{org.suburb.name if org.suburb }" }
-            { lat: org.lat, lng: org.long, infowindow: "#{org.suburb.name if org.suburb }" }
-          }
-        when "suburbs"
-          @org_hash = @organisations.select { |org| org.suburb }.map { |org |
-            { lat: org.suburb.lat, lng: org.suburb.long, infowindow: "#{org.suburb.name}" }
-          }
+    case params[:group_by]
+      when "suburbs"
+        @org_hash = @organisations.select { |org| org.suburb }.map { |org |
+          { lat: org.suburb.lat, lng: org.suburb.long, infowindow: "#{org.suburb.name}" }
+        }
+      else #lat/long
+        @org_hash = @organisations.select { |org| org.lat and org.long }.map { |org |
+          #{ lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.address} <br/> #{org.suburb.name if org.suburb }" }
+          { lat: org.lat, lng: org.long, infowindow: "#{org.suburb.name if org.suburb }" }
+        }
       end
-    else
-      @org_hash = @organisations.select { |org| org.lat and org.long }.map { |org |
-        #{ lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.address} <br/> #{org.suburb.name if org.suburb }" }
-        { lat: org.lat, lng: org.long, infowindow: "#{org.suburb.name if org.suburb }" }
-      }
-    end
 
     @org_suburb_count = @organisations
               .joins(:suburb)
