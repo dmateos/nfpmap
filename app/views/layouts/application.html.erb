@@ -54,8 +54,10 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Organisation map", root_path  %></li>
             <li><%= link_to "Suburb map", suburbmap_path  %></li>
-            <li><%= link_to "Organisation list", organisations_path  %></li>
-            <li><%= link_to "Suburb list", suburbs_path  %></li>
+            <% if false %>
+              <li><%= link_to "Organisation list", organisations_path  %></li>
+              <li><%= link_to "Suburb list", suburbs_path  %></li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -66,7 +68,7 @@
       <%= yield %>
 
       <footer>
-        <p>&copy; Daniel Mateos 2014</p>
+        <p>&copy; <a href="http://mateos.cc">Daniel Mateos 2015</a>, For <a href="http://www.connectingup.org">Connecting Up (love)</a></p>
       </footer>
 
     </div> <!-- /container -->
