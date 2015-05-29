@@ -3,13 +3,20 @@ class SuburbsController < ApplicationController
     @suburbs = Suburb.page(params[:page])
   end
 
-  def new
-  end
-
-  def edit
-  end
-
   def show
+
+  end
+
+  def new
+    @suburb = Suburb.new
+  end
+
+  def create
+    @suburb = Suburb.new(suburb_params)
+    @suburb.save
+    respond_to do |format|
+      format.html { redirect_to @suburb }
+    end
   end
 
   def latlong
@@ -21,5 +28,10 @@ class SuburbsController < ApplicationController
       format.json
       format.html
     end
+  end
+
+  private
+  def suburb_params
+    params.require(:suburb).permit(:name, :postcode, :state, :lat, :long)
   end
 end
