@@ -1,13 +1,15 @@
+default: &default
+  adapter: mysql2
+  host: db
+
+test:
+  <<: *default
+  database: nfpmap_test
+
 development:
-    adapter: mysql2
-    encoding: utf8
-    database: nfpmap
-    username: nfpmap
-    password: nfpmap
+  <<: *default
+  database: nfpmap
 
 production:
-    adapter: mysql2
-    encoding: utf8
-    database: nfpmap
-    username: nfpmap
-    password: nfpmap
+  <<: *default
+  database: nfpmap

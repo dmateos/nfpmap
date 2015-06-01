@@ -1,0 +1,23 @@
+storage:
+  image: busybox
+  volumes:
+    - /var/lib/mysql
+  command: tail -f /dev/null
+
+db:
+  image: mysql
+  volumes_from:
+    - storage
+  ports:
+    - "3306:3306"
+  environment:
+    - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+
+web:
+  build: .
+  links:
+    - db
+  ports:
+    - "3000:3000"
+  volumes:
+    - .:/app
