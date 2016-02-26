@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def index
     #@datasets = Organisation.select(:dataset).map(&:dataset).uniq.sort
-    @datasets = Organisation.where(dataset: "sacom/adel-and-north").select(:dataset).map(&:dataset).uniq.sort
+    @datasets = Organisation.where(dataset: "sacom/adel-and-north").select(:dataset).map(&:dataset).uniq
 
     if params.has_key?(:datasets)
       @organisations = Organisation.where(dataset: params[:datasets]).includes(:suburb)
@@ -15,11 +15,11 @@ class PagesController < ApplicationController
     case params[:group_by]
     when "suburbs"
       @org_hash = @organisations.select { |org| org.suburb }.map { |org |
-        { lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.address} <br/> #{org.suburb.name if org.suburb }" }
+        { lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.full_address_html}" }
       }
     else #lat/long
       @org_hash = @organisations.select { |org| org.lat and org.long }.map { |org |
-        { lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.address} <br/> #{org.suburb.name if org.suburb }" }
+        { lat: org.lat, lng: org.long, infowindow: "#{org.name} <br/> #{org.full_address_html}" }
       }
     end
 

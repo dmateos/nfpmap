@@ -7,4 +7,8 @@ class Organisation < ActiveRecord::Base
   def full_address
     suburb ?  "#{address}, #{suburb.name}, #{suburb.state}, #{suburb.postcode}" : "#{address}"
   end
+
+  def full_address_html
+    suburb ?  "#{address}, <br/> #{suburb.name}, <br/> #{suburb.state}, #{suburb.postcode}" : "#{address}"
+  end
 end
