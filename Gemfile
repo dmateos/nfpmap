@@ -37,6 +37,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :development, :test do
   gem "spring"
+  gem 'rspec-rails', '~> 3.0'
+  gem "factory_girl_rails"
 end
 
 gem 'mysql2', '~> 0.3.18'
@@ -46,3 +48,4 @@ gem "kaminari" #pagnation
 gem "gmaps4rails"
 gem "underscore-rails"
 gem "geocoder"
+gem "nokogiri"
