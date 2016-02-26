@@ -48,4 +48,4 @@ gem "kaminari" #pagnation
 gem "gmaps4rails"
 gem "underscore-rails"
 gem "geocoder"
-gem "nokogiri"
+gem 'savon', '~> 2.0'

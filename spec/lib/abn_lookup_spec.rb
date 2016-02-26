@@ -2,19 +2,15 @@ require "rails_helper"
 require "abn_lookup"
 
 describe AbnLookup do
-  context "name lookup" do
-    subject { described_class.new(:name, name: "Connecting Up", postcode: 5000 )  } 
+  subject { described_class.new } 
 
-    it "looks up an organisation based on name" do
-      expect(subject.find_by_name("")).to eq(nil)
+  context "finds a ABN by organisation name and postcode" do
+    it "returns the matching abn for the given organisation" do
+      expect(subject.find(:name, name: "Connecting Up", postcode: 5000)).to eq("13903061955")
     end
-  end
 
-  context "abn lookup" do
-    subject { described_class.new(:abn, abn: "13903061955" )  } 
-
-    it "looks up an organisation based on abn" do
-      expect(subject.find_by_abn("")).to eq(nil)
+    it "returns false on no valid results" do
+      expect(subject.find(:name, name: "noone is called this", postcode: 1000)).to eq(false)
     end
   end
 end
