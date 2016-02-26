@@ -13,22 +13,22 @@
 
 ActiveRecord::Schema.define(version: 20141215015833) do
 
-  create_table "organisations", force: true do |t|
-    t.string   "name"
-    t.string   "address"
-    t.string   "website"
-    t.string   "dataset"
+  create_table "organisations", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "address",    limit: 255
+    t.string   "website",    limit: 255
+    t.string   "dataset",    limit: 255
     t.float    "lat",        limit: 24
     t.float    "long",       limit: 24
-    t.integer  "suburb_id"
+    t.integer  "suburb_id",  limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "suburbs", force: true do |t|
-    t.string   "name"
-    t.integer  "postcode"
-    t.string   "state"
+  create_table "suburbs", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "postcode",   limit: 4
+    t.string   "state",      limit: 255
     t.float    "lat",        limit: 24
     t.float    "long",       limit: 24
     t.datetime "created_at"
