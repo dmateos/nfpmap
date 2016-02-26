@@ -21,7 +21,6 @@ class SuburbsController < ApplicationController
 
   def latlong
     name = params[:suburb].gsub("suburb_", "").gsub("_", " ")
-    puts name
     @suburb = Suburb.find_by_name(name)
 
     respond_to do |format|
